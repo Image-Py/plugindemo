@@ -85,7 +85,7 @@ Description: a friendly develop tutorial
 
 ## <span id = "发布到ImagePy">发布到ImagePy</span>
 
-你也可以将插件项目发布到ImagePy，如果你已经完成你的插件项目，那么发布是一个很简单的过程。只需要fork一份ImagePy，将你的readme文件拷贝到imagepy - Plugins - Contribute - Contributors下，重命名为插件项目名称（不强制，但最好能体现插件功能），然后给ImagePy提Pull Request。当ImagePy组织成员收到pr，并进行测试后，会merge你的pr，如有问题会通过issue进行沟通。一旦合并到ImagePy主分支内，用户即可通过插件管理器对插件进行检索，安装，卸载等操作。
+你也可以将插件项目发布到ImagePy，如果你已经完成你的插件项目，那么发布是一个很简单的过程。只需要fork一份ImagePy，将你的readme文件拷贝到imagepy - Menus - Plugins - Contribute - Contributors下，重命名为插件项目名称（不强制，但最好能体现插件功能），然后给ImagePy提Pull Request。当ImagePy组织成员收到pr，并进行测试后，会merge你的pr，如有问题会通过issue进行沟通。一旦合并到ImagePy主分支内，用户即可通过插件管理器对插件进行检索，安装，卸载等操作。
 ![14](http://idoc.imagepy.org/demoplugin/06.png)
 
 <div align=center>Plugins Manager</div><br>
