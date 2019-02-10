@@ -1,6 +1,6 @@
-# <span id = "Tool">Tool</span>
+# Tool 插件
 
-Tool插件用来完成鼠标交互，启动时被加载为工具栏上的图标。典型的工具插件是，roi，画笔，测量工具等。
+Tool插件用来完成鼠标交互，启动时被加载为工具栏上的图标。典型的工具插件是，roi编辑，画笔，测量工具等。
 
 
 
@@ -47,7 +47,7 @@ class Plugin(Tool):
     def mouse_wheel(self, ips, x, y, d, **key):pass
 ```
 
-通过重载mouse_down, mouse_up, mouse_move方法，可以实现鼠标交互，这里我们实现一个最常见的画笔工具。鼠标按下时，标记status为True，在鼠标移动过程中进行绘图，并更新显示。
+通过重载`mouse_down`, `mouse_up`, `mouse_move`方法，可以实现鼠标交互，这里我们实现一个最常见的画笔工具。鼠标按下时，标记`status`为`True`，在鼠标移动过程中进行绘图，并更新显示。
 
 ![14](http://idoc.imagepy.org/demoplugin/24.png)
 
@@ -56,8 +56,8 @@ class Plugin(Tool):
 
 **Tool的加载方式**
 
-1. 文件必须以_tol.py结尾，类名必须叫Plugin（一个文件只能实现一个工具）
-2. 必须位于tools目录下的一级子菜单下
+1. 文件必须以`_tol.py`结尾，类名必须叫`Plugin`（一个文件只能实现一个工具）
+2. 必须位于`tools`目录下的一级子菜单下
 3. 需要配有一个同名的，16*16的gif文件用于工具栏图标
 4. 单击即可选中，并作用与画布，如有配置参数，双击可进行设置
 
@@ -66,15 +66,15 @@ class Plugin(Tool):
 
 <div align=center>Tool的加载</div><br>
 
-## <span id = "Tool的运行机制">Tool的运行机制</span>
+## Tool 的运行机制
 
 **title:** 标题
 
-**mouse_down(self, ips, x, y, btn, ******key):** 鼠标按下时触发，ips是当前作用图像的ImagePlus封装类，可以通过ips.img获取当前图像，也可以ips.lut, ips.roi, ips.unit获取图像的索引表，roi，比例尺和单位等附加信息。x, y是当前鼠标在数据坐标系下的位置，btn触发事件的鼠标按键，0:无，1:左键，2:中键，3:右键。可以通过key['alt'], key['ctrl'], key['shift']获取相应功能键是否按下，通过key['canvas']获取触发事件的Canvas对象。
+**mouse_down:** `mouse_down(self, ips, x, y, btn, **key):` 鼠标按下时触发，`ips`是当前作用图像的`ImagePlus`封装类，可以通过`ips.img`获取当前图像，也可以`ips.lut`, `ips.roi`, `ips.unit`获取图像的索引表，roi，比例尺和单位等附加信息。x, y是当前鼠标在数据坐标系下的位置，`btn`触发事件的鼠标按键，0:无，1:左键，2:中键，3:右键。可以通过`key['alt']`, `key['ctrl']``, key['shift']`获取相应功能键是否按下，通过`key['canvas']`获取触发事件的`Canvas`对象。
 
-**mouse_up(self, ips, x, y, btn, ******key):** 鼠标抬起时触发，具体参数与mouse_down相同。
+**mouse_up:** `mouse_up(self, ips, x, y, btn, **key):` 鼠标抬起时触发，具体参数与`mouse_down`相同。
 
-**mouse_move(self, ips, x, y, btn, ******key):** 鼠标移动时触发，具体参数与mouse_down相同。
+**mouse_move:** `mouse_move(self, ips, x, y, btn, **key):` 鼠标移动时触发，具体参数与`mouse_down`相同。
 
-**mouse_wheel(self, ips, x, y, btn, ******key):** 鼠标滚轮滚动时触发，具体参数与mouse_down相同。
+**mouse_wheel(self, ips, x, y, btn, ******key):** 鼠标滚轮滚动时触发，具体参数与`mouse_down`相同。
 

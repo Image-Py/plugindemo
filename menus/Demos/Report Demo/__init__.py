@@ -1,0 +1,1 @@
+catlog = ['Personal Information', 'Coins Report']

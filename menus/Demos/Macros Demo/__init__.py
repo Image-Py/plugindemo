@@ -1,0 +1,1 @@
+catlog = ['Macros Gaussian Invert', 'Macros Coins Segment']

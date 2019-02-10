@@ -1,11 +1,9 @@
-# <span id = "Free">Free</span>
+# Free plugin
 
-Free是不需要任何依赖就可以独立运行的插件，我们可以在里面做任何事，如创建图像，下载在线资源等。
+Free is a plugin that can run independently without any dependencies. We can do anything in it, such as creating images, downloading online resources, and so on.
 
 
-
-## <span id = "创建图像">创建图像</span>
-
+## Create image
 ```python
 from imagepy.core.engine import Free
 from imagepy import IPy
@@ -22,15 +20,14 @@ class NewImage(Free):
         imgs = [np.zeros((para['h'], para['w']), dtype=np.uint8)]
         IPy.show_img(imgs, para['name'])
 ```
-
-这里通过一个例子，创建一副新图像，同样我们可以通过para，view进行参数交互。
+Here we demonstrate this type of plugin through an example (create a new image). Similarly, we can interact with parameters through `para` and `view`.
 
 ![14](http://idoc.imagepy.org/demoplugin/22.png)
 
 <div align=center>New Image</div><br>
 
 
-## <span id = "关于对话框">关于对话框</span>
+## About dialog-box
 
 ```python
 from imagepy.core.engine import Free
@@ -42,16 +39,14 @@ class About(Free):
     def run(self, para=None):
         IPy.alert('ImagePy v0.2')
 ```
-
-早在Hello World时就接触过，这里用作关于对话框。
+It has been introduced in [Hello World](doc/start.md), and it is used as a dialog-box.
 
 ![14](http://idoc.imagepy.org/demoplugin/23.png)
 
 <div align=center>ImagePy Alert</div><br>
 
 
-## <span id = "退出软件">退出软件</span>
-
+## Quit
 ```python
 from imagepy.core.engine import Free
 from imagepy import IPy
@@ -63,23 +58,24 @@ class Close(Free):
     def run(self, para = None):
         IPy.curapp.Close()
 ```
-
-退出软件是Free类型插件一个非常典型的应用，但值得一提的是，插件中加入了asyn = False，这个标识告诉ImagePy不要启用异步执行run，因为窗口关闭属于UI操作，必须在主线程进行。
-
+The **quit** is a typical application in the `Free` type plugin. It is worth noticing that if `asyn = False` is added in the plugin, this sign will tell imagepy not to asynchronous execute `run`. Because 'window close' is a `UI` operation and must be done in the main thread.
 
 
-## <span id = "Free的运行机制">Free的运行机制</span>
 
-Free相比其他插件是运行机制最简单的，因为Free不需要做任何的流程准备，run也只有通过交互得到的para一个参数，完全放权给开发者。
+## Operating mechanism of Free
+`Free` is the easiest plugin to run compared to other ones, because there is no need for preparation process for  `Free`. `run` only has one parameter `para`, obtained through interaction, which is completely open to the developer.
+
 
 **para, view:** 
 
-参数字典，具体用法参阅start入门。
+Parameter dictionary, for specific usage, see [start](doc/start.md).
 
 **run:** 
 
-获取交互结果，做任何想做的事
+Get interactive results and do whatever you want.
 
 **load:** 
 
-def load(self, ips) 最先执行，如果return结果为False，插件将中止执行。默认返回True，如有必要，可以对其进行重载，进行一系列条件检验，如不满足，IPy.alert弹出提示，并返回False。
+`def load(self, ips)` is executed at first，if the `False` is returned with `return` , the plugin will be ended. Default return is `True`, if neccesary, it can be overloaded for a series of condition checks. If it is not satisfied, the `IPy.alert` will popup prompt, and return`False` 
+
+

@@ -15,7 +15,6 @@ class Plugin ( wx.Panel ):
 		self.SetSizer( sizer )
 		self.Layout()
 		self.Fit()
-		# Connect Events
 		self.btn_invert.Bind( wx.EVT_BUTTON, self.on_invert)
 
 	def on_invert(self, event):

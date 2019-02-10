@@ -1,10 +1,7 @@
-# <span id = "Filter">Filter</span>
+# Filter plugin
+[Filter](https://en.wikipedia.org/wiki/Filtering_problem_(stochastic_processes)) is one of the most important and basic applications in image processing. It utilizes the stochastic model to de-noise the two or three dimensional images.
 
-Filter是最重要的一类插件，用于对二维图像进行滤波，也是图像处理中最基础，最普遍的一类应用。
-
-
-
-## <span id = "Invert">Invert</span>
+## Invert
 
 ```python
 from imagepy.core.engine import Filter
@@ -17,14 +14,17 @@ class Invert(Filter):
         return 255-snap
 ```
 
-Invert插件，note指明插件支持任何类型，并且支持roi，支持撤销。我们在run里面返回处理后的结果。关于snap和img，img是当前图像，而如果当note中加入auto_snap标识，在run之前，框架会帮我们把img拷贝给snap，因为多数的滤波器需要一个buffer来卷积，此外撤销和roi支持也必须借助snap。
+**Invert plugin**，`note` indicates that the plugin supported types. It enables us to choose the ROI to deal with and to undo the operations. The results is return with the help of function `run`.</br>
+About `snap` and `img`: </br>
+`img`is the opened image，if the `auto_snap` is  added in the `note`，owing to the need of `buffer` for the most of filters to convolve, before `run` acted，the framework will  copy the `img`to `snap`.  Besides, undo operation and ROI support must rely on `snap`.
 
 ![14](http://idoc.imagepy.org/demoplugin/13.png)
 
 <div align=center>Invert</div><br>
 
 
-## <span id = "Gaussian">Gaussian</span>
+
+## Gaussian
 
 ```python
 from imagepy.core.engine import Filter
@@ -40,63 +40,56 @@ class Gaussian(Filter):
         gaussian_filter(snap, para['sigma'], output=img)
 ```
 
-Gaussian插件，note指明支持任何类型，并且支持roi，支持撤销，并提供预览功能。para和view指明有一个浮点参数sigma，而run里，我们调用scipy.ndimage.gaussian_filter，对snap进行滤波，输出指向img，如果函数不带输出项，我们将处理结果return即可，框架会帮我们赋值给img。
+Gaussian plugin，`note` indicates that the plugin supported types，It enables us to choose the ROI to deal with and to undo the operations. It also provides the preview feature. `para` and `view` determine a float type  parameter `sigma`. In function `run`，the `scipy.ndimage.gaussian_filter` is called to filter the `snap`, and the output is directed to `img`. If there is no output in the function, the result can be assigned to `img` with the help with framework imagepy directly: with the `return xxx` at the end of the function.
+
 
 ![14](http://idoc.imagepy.org/demoplugin/14.png)
 
 <div align=center>Gaussian</div><br>
 
 
-## <span id = "Filter运行机制">Filter运行机制</span>
+
+## Filter operating mechanism
 
 **note:** 
+`note` option is the behavior control identifier, to control the flow of plugin execution. 
+**i.e.:** Let the framework perform type compatibility detection, if not satisfied, it will be automatic ended. Set channel and sequence support settings. More : preview, ROI supports and other ones.
 
-note选项是行为控制标识，用于控制插件执行的流程，比如让框架进行类型兼容检测，如不满足自动中止。设定通道和序列支持设定，以及是否需要提供预览，roi等支持。
+1. `all`: Plugin supports all types.
+2. `8-bit`: Plugin supports unsigned 8 bit
+3. `16-bit`: Plugin supports unsigned 16 bit
+4. `int`: Plugin supports 32-bit, 64-bit integers
+5. `rgb`: Plugin supports 3 channels, 24-bit color
+6. `float`: Plugin supports 32-bit, 64-bit floating point.
+ ------
 
-1. all：插件支持任意类型
+7. `not_channel`: Do not automatically traverse the channel when processing multiple channels (by default, each channel will be processed in turn)
 
-2. 8-bit：插件支持无符号8位
+8. `not_slice`: When processing image sequences, do not ask `if you want to batch process` (users are asked by default)
 
-3. 16-bit：插件支持无符号16位
-
-4. int：插件支持32位，64位整数
-
-5. rgb：插件支持3通道24位彩色
-
-6. float：插件支持32位，64位浮点
-
-   ------
-
-7. not_channel：当处理多通道时，不要框架自动遍历通道（默认情况下会将每个通道依次处理）
-
-8. not_slice：当处理图像序列时，不要询问是否批量处理（默认情况会询问用户）
-
-9. req_roi：是否必须有roi才能够处理
-
+9. `req_roi`: Whether there must be a ROI to be able to handle
    ---
 
-10. auto_snap：是否需要框架在处理器对当前图像自动缓冲
+10. `auto_snap`: Whether the framework is required to automatically buffer the current image on the processor
 
-11. auto_msk：是否自动支持ROI（必须配合auto_snap才生效，原理是用snap恢复ROI以外像素）
+11. `auto_msk`: Whether to automatically support ROI (**must be effective with `auto_snap`**, the principle is to use `snap` to restore pixels outside the ROI)
+12. `preview`: Whether to support preview (view results in real time), to adjust parameters
+13. `2int`: Whether to convert data below `int32` to `int32` and then process it (for example, avoid `8-bit` operation overflow)
 
-12. preview：是否支持预览，调整参数实时查看结果
+14. `2float`: Whether to automatically convert data below float32 to float32 and then process it during operation (some operations require precision)
 
-13. 2int：是否在运算过程中将低于int32的数据转为int32再进行处理（例如避免8位的运算溢出）
-
-14. 2float：是否在运算过程中将低于float32的数据自动转为float32再进行处理（一些运算要求精度）
-
-**para, view:** 参数字典，具体用法参阅start入门。
+**para, view:** Parameter dictionary, for specific usage, see [start](doc/start.md).
 
 **run:** 
 
-1. ips：图像封装类，通常在filter中不需要对其进行操作
-2. snap：当note里加入auto_snap标识后，在run之前框架会将当前图像拷贝到snap（尽可能实现使用对snap进行处理，将结果赋值给img）
-3. img：当前图像，我们将结果赋值给img，或return结果，由框架赋值给img，并完成界面刷新。
+1. `ips`: Image wrapper class, usually does not need to be operated in `filter` 
+2. `snap`: as the `auto_snap` is added in `note`, before `run`, the framework imagepy will copy the opened image to `snap` (as much as possible to deal with `snap`, and assign the results to `img`)
+3. `img`: opened image, the result is assigned to `img`, or `return` results, assigned `img` by imagepy, and complete the interface refresh
 
 **load:** 
 
-def load(self, ips) 最先执行，如果return结果为False，插件将中止执行。默认返回True，如有必要，可以对其进行重载，进行一系列条件检验，如不满足，IPy.alert弹出提示，并返回False。
+`def load(self, ips)` is executed at first，if the `False` is returned with `return` , the plugin will be ended. Default return is `True`, if neccesary, it can be overloaded for a series of condition checks. If it is not satisfied, the `IPy.alert` will popup prompt, and return`False` 
 
 **preview:**
 
-def preview(self, ips, para) 在预览时执行，默认会调用run处理当前图像，如果有必要可以对其进行重载。
+`def preview(self, ips, para)` is executed during preview, the opened image is processed with calling `run` by default, and can be overloaded if necessary.
