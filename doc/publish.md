@@ -84,7 +84,7 @@ Description: a friendly develop tutorial
 
 **给ImagePy发Pull Request**
 
-你也可以将插件项目发布到ImagePy，如果你已经完成你的插件项目，那么发布是一个很简单的过程。只需要`fork`一份ImagePy，将你的`readme`文件拷贝到**`imagepy - Plugins - Contribute - Contributors`**下，重命名为插件项目名称（不强制，但最好能体现插件功能），然后给ImagePy提`Pull Request`。当ImagePy组织成员收到`Pull Request`，并进行测试后，会`merge`你的`Pull Request`，如有问题会通过`issue`进行沟通。一旦合并到ImagePy主分支内，用户即可通过插件管理器对插件进行检索，安装，卸载等操作。
+你也可以将插件项目发布到ImagePy，如果你已经完成你的插件项目，那么发布是一个很简单的过程。只需要`fork`一份ImagePy，将你的`readme`文件拷贝到**`imagepy- Menus  - Plugins - Contribute - Contributors`**下，重命名为插件项目名称（不强制，但最好能体现插件功能），然后给ImagePy提`Pull Request`。当ImagePy组织成员收到`Pull Request`，并进行测试后，会`merge`你的`Pull Request`，如有问题会通过`issue`进行沟通。一旦合并到ImagePy主分支内，用户即可通过插件管理器对插件进行检索，安装，卸载等操作。
 
 ![14](http://idoc.imagepy.org/demoplugin/06.png)
 
