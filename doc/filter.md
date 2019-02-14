@@ -1,6 +1,6 @@
 # Filter Plug-in
 
-Filter is the most important class of plug-ins, which is used to filter two-dimensional images. And it is also the most basic image processing, the most common applications.
+Filter is the most important class of plug-ins, which is used to filter two-dimensional images. And it is also the most basic image processing and the most common applications.
 
 
 
@@ -17,7 +17,7 @@ class Invert(Filter):
         return 255-snap
 ```
 
-Invert plug-in。 The ` note ` indicates the plugin supports any type as well as  ` roi ` and the undo operation. We return  processing results to the ` run `. About ` snap ` and ` img `, the ` img ` is the current image. when ` note ` is added to   ` auto_snap ` logo,  the framework will help us to copy ` img `  to ` snap `  before ` run `. Because most of the filter need a ` buffer ` for convolution, moreover the undo operation and ` ROI ` support must also need the ` snap `.
+Invert plug-in. The ` note ` indicates the plugin supports any type as well as ` roi ` and the undo operation. We return processing results to the ` run `. About ` snap ` and ` img `, the ` img ` is the current image. When ` note ` is added to ` auto_snap ` logo,  the framework will help us to copy ` img ` to ` snap `  before ` run `. Because most of the filter need a ` buffer ` for convolution. Moreover the cancellation operation and ` roi ` support must also need the ` snap `.
 
 ![14](http://idoc.imagepy.org/demoplugin/13.png)
 
@@ -41,7 +41,7 @@ class Gaussian(Filter):
         gaussian_filter(snap, para['sigma'], output=img)
 ```
 
-Gaussian plug-in. The ` note ` specifies any type support, and supports the ` roi ` as well as cancellation, which provides the preview function. The ` para ` and ` view ` indicate there is a floating point parameters ` sigma `. In ` run `, we can call ` scipy. ndimage. gaussian_filter `  to filter ` snap ` with the output to ` img `. If a function without output item, we will process the results ` return `, and framework will help us to assign a value to ` img `.
+Gaussian plug-in. The ` note ` specifies any type support, and supports the ` roi ` as well as cancellation, which provides the preview function. The ` para ` and ` view ` indicate there is a floating point parameters ` sigma `. In ` run `, we can call ` scipy. ndimage. gaussian_filter `  to filter ` snap ` with the output to ` img `. If a function without output item, we will process the results ` return `. And framework will help us to assign a value to ` img `.
 
 ![14](http://idoc.imagepy.org/demoplugin/14.png)
 
