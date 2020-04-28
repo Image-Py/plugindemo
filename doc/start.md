@@ -106,28 +106,76 @@ Here we implement a questionnaire, which allow the user to input all kinds of in
 ![14](http://idoc.imagepy.org/demoplugin/03.png)
 <div align=center>Questionnaire</div><br>
 
-**label:** para type：`no parameters required`, view usage：`('lab', 'lab', 'what you want to show')`
+**Label**  
+`('lab', 'lab', 'what you want to show')`  
+- `lab` : indicate parameter type  
 
-**str:** para type：`str`, view usage：`(str, key, prefix, suffix)`， the ` key ` is correspond with ` key ` of  ` para ` . ` prefix ` and ` suffix ` is used as  tips content before and after the input box.
+**String**  
+`(str, key, prefix, suffix)`  
+- `str` : indicate parameter type  
+- `key` : corresponding key in dictionary `para`
+- ` prefix `: Label before the string input field  
+- ` suffix `: Label after the string input field  
 
-**int:** para type：`int`，view usage：`(int, key, (lim1, lim2), accu, 'prefix', 'suffix')`，the ` key ` is correspond with ` key ` of  ` para ` .` limit ` used to limit the range of input value，`accu` limits the number of decimal places (0).` prefix ` and ` suffix ` are used as  tips content before and after the input box.
+**Integer**   
+`(int, key, (lim1, lim2), accu, 'prefix', 'suffix')`  
+- `int` : indicate parameter type  
+- `key` : corresponding key in dictionary `para`  
+- `(lim1, lim2)` tuple of integer limiting the range of input values  
+- `accu`: integer specifying the the number of decimal places to display for the integer parameter  
+- ` prefix `: Label before the Integer input field  
+- ` suffix `: Label after the Integer input field  
 
-**float:** para type：`float`，view usage：`(int, key, (lim1, lim2), accu, 'prefix', 'suffix')`，the ` key ` is correspond with ` key ` of  ` para ` .` limit ` used to limit the range of input value，`accu` limits the number of decimal places (0).` prefix ` and ` suffix ` are used as  tips content before and after the input box.
+**Float**  
+`(float, key, (lim1, lim2), accu, 'prefix', 'suffix')`  
+- `float`: indicate parameter type  
+- `key`: corresponding key in dictionary `para`
+- `(lim1, lim2)` tuple of integer limiting the range of input values  
+- `accu`: integer specifying the the number of decimal places to display for the float parameter  
+- ` prefix `: Label before the Float input field  
+- ` suffix `: Label after the Float input field  
 
-**slider:** para type：`int/float`，view usage：`('slide', key, (lim1, lim2), accu, 'prefix')`，the ` key ` is correspond with ` key ` of  ` para ` .` limit ` used to limit the range of input value，`accu` limits the number of decimal places (0). ` prefix ` is used as  tips content before and after the input box.
+**Slider**  
+`('slide', key, (lim1, lim2), accu, 'prefix')`  
+- parameter type: `int/float`   
+- `key`: corresponding key in dictionary `para`  
+- `(lim1, lim2)` tuple of integer limiting the range of input values  
+- `accu`: integer specifying the the number of decimal places to display for the integer parameter  
+- ` prefix `: Label before the slider    
+- ` suffix `: Label after the slider    
 
-**bool:** para type：`bool`，view usage：`(bool, 'key', 'label')`，the ` key ` is correspond with ` key ` of  ` para ` .`label` is used as a hint.
+**Boolean**   
+`(bool, 'key', 'label')`  
+- `bool`: indicate parameter type    
+- `key`: corresponding key in dictionary `para`, value should be `True` or `False`  
+- `label` : label describing the checkbox 
 
-**list:** para type：`any type`，view usage：`(list, key, [choices], type, prefix, suffix)`，the ` key ` is correspond with ` key ` of  ` para ` .`choices` is a character option, `type` is the expected output type, such as `str`, `int`. ` prefix ` and ` suffix ` are used as  tips content before and after the input box.
+**List**  
+`(list, key, [choices], type, prefix, suffix)`    
+- `list`: indicate parameter type, dropdown single-item selection (item of any type ex: int, str...)  
+- `key`: corresponding key in dictionary `para`, value should be a list of strings  
+- `[choices]` : list of choices  
+- `type` : expected output object type (ex: `str`)  
+- ` prefix `: Label before the list field    
+- ` suffix `: Label after the list field   
 
-**choices:** para type：`str list`，view usage：`('chos', key, [choices], prefix, suffix)`，Similar to `list`, the difference is that `choices` can support multiple selections, and the options are recorded in the form of `list of string`.
+**Choices**  
+`('chos', key, [choices], prefix, suffix)`    
+- `chos`: indicate multiple checkboxes selections  
+- `key`: corresponding key in dictionary `para`, value should be a list of strings     
+- `[choices]` : list of choices  
+- ` prefix `: Label before the choice list     
+- ` suffix `: Label after the choice list   
+Similar to `list`, the difference is that `choices` can support multiple selections, and the options are recorded in the form of `list of string`.
 
-**color:** para type：`(r,g,b) 0-255`， usage：`('color', key, prefix, suffix)`，the ` key ` is correspond with ` key ` of  ` para ` .` prefix ` and ` suffix ` are used as  tips content before and after the input box.
-
-
+**Color**   
+`('color', key, prefix, suffix)`   
+- `color`: indicate parameter type, color selection  
+- `key`: corresponding key in dictionary `para`, value should be a `(r,g,b) 0-255` tuple  
+- ` prefix `: Label before the color field     
+- ` suffix `: Label after the color field  
 
 *In addition to the basic data types above, ImagePy also supports some parameters of internal types, such as receiving an image, receiving a table, or making single or multiple selections of the fields of the table, which we will show in later example*
-
 
 
 ## Implement multi-plugins in one file

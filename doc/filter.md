@@ -17,7 +17,10 @@ class Invert(Filter):
         return 255-snap
 ```
 
-Invert plug-in. The ` note ` indicates the plugin supports any type as well as ` roi ` and the undo operation. We return processing results to the ` run `. About ` snap ` and ` img `, the ` img ` is the current image. When ` note ` is added to ` auto_snap ` logo,  the framework will help us to copy ` img ` to ` snap `  before ` run `. Because most of the filter need a ` buffer ` for convolution. Moreover the cancellation operation and ` roi ` support must also need the ` snap `.
+Invert plug-in. The ` note ` indicates the plugin supports any type as well as ` roi ` and the undo operation. We return processing results to the ` run `.  
+About ` snap ` and ` img `, the ` img ` is the current image.  
+When ` auto_snap ` is added to ` note `,  the framework will automatically copy ` img ` to ` snap `  before executing ` run `. Because most filters need a ` buffer ` for convolution.   
+Cancellation operation and ` roi ` support also requires the ` snap `.
 
 ![14](http://idoc.imagepy.org/demoplugin/13.png)
 
